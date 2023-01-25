@@ -1,4 +1,4 @@
-from flask import Flask,render_template,request,redirect
+from flask import Flask,render_template,request,redirect,session
 from web3 import Web3,HTTPProvider
 import json
 
@@ -16,7 +16,22 @@ def connect_blockchain_register(wallet):
     contract=web3.eth.contract(address=contract_address,abi=contract_abi)
     return(contract,web3)
 
+def connect_blockchain_fund(wallet):
+    blockchain='http://127.0.0.1:7545'
+    web3=Web3(HTTPProvider(blockchain))
+    if wallet==0:
+        wallet=web3.eth.accounts[0]
+    web3.eth.defaultAccount=wallet
+    artifact_path='../build/contracts/funds.json'
+    contract_address='0x9b159c8C1271AdCC359C11a08B0C66b99100AD5F'
+    with open(artifact_path) as F:
+        contract_json=json.load(F)
+        contract_abi=contract_json['abi']
+    contract=web3.eth.contract(address=contract_address,abi=contract_abi)
+    return(contract,web3)
+
 app=Flask(__name__)
+app.secret_key='Sandhya'
 
 @app.route('/')
 def homepage():
@@ -39,8 +54,25 @@ def descpage():
     return render_template('desc.html')
 
 @app.route('/publictracking')
-def trackingpage():
-    return render_template('publictracking.html')
+def publictrackingpage():
+    contract,web3=connect_blockchain_register(0)
+    _usernames,_emails,_names,_mobiles,_depts,_roles,_passwords=contract.functions.viewusers().call()
+    contract,web3=connect_blockchain_fund(0)
+    _senders,_receivers,_amounts=contract.functions.viewfunds().call()
+    print(_usernames,_emails,_names,_mobiles,_depts,_roles,_passwords)
+    print(_senders,_receivers,_amounts)
+    data=[]
+    for i in range(len(_senders)):
+            dummy=[]
+            #sno,sender,sender dept, receiver,amount
+            sindex=_usernames.index(_senders[i])
+            dummy.append(_senders[i])
+            dummy.append(_names[sindex])
+            dummy.append(_depts[sindex])
+            dummy.append(_receivers[i])
+            dummy.append(_amounts[i])
+            data.append(dummy)
+    return render_template('publictracking.html',res=data,l=len(data))
 
 @app.route('/newhead')
 def newheadpage():
@@ -49,6 +81,42 @@ def newheadpage():
 @app.route('/newhome')
 def newhomepage():
     return render_template('newhome.html')
+
+@app.route('/newdesc')
+def newdescpage():
+    return render_template('newdesc.html')
+
+@app.route('/allocatefund')
+def allocatefundpage():
+    return render_template('allocatefund.html')
+
+@app.route('/logout')
+def logoutpage():
+    session.pop('username',None)
+    return redirect('/')
+
+@app.route('/tracking')
+def trackingpage():
+    contract,web3=connect_blockchain_register(0)
+    _usernames,_emails,_names,_mobiles,_depts,_roles,_passwords=contract.functions.viewusers().call()
+    contract,web3=connect_blockchain_fund(0)
+    _senders,_receivers,_amounts=contract.functions.viewfunds().call()
+    print(_usernames,_emails,_names,_mobiles,_depts,_roles,_passwords)
+    print(_senders,_receivers,_amounts)
+    print(session['username'])
+    data=[]
+    for i in range(len(_senders)):
+        if _senders[i]==session['username']:
+            dummy=[]
+            #sno,sender,sender dept, receiver,amount
+            sindex=_usernames.index(_senders[i])
+            dummy.append(_senders[i])
+            dummy.append(_names[sindex])
+            dummy.append(_depts[sindex])
+            dummy.append(_receivers[i])
+            dummy.append(_amounts[i])
+            data.append(dummy)
+    return render_template('tracking.html',res=data,l=len(data))
 
 @app.route('/registeruser',methods=['post'])
 def registeruser():
@@ -73,9 +141,22 @@ def loginuser():
     contract,web3=connect_blockchain_register(0)
     state=contract.functions.loginuser(username,int(password)).call()
     if state==True:
-        return redirect('/newhome')
+        session['username']=username
+        return redirect('/newdesc')
     else:
-        return('login failed')
+        return(render_template('login.html',err='login failed'))
+
+@app.route('/allocatefundform',methods=['post'])
+def allocatefundform():
+    department=request.form['department']
+    sender=request.form['sender']
+    receiver=request.form['receiver']
+    amount=request.form['amount']
+    print(department,sender,receiver,amount)
+    contract,web3=connect_blockchain_fund(0)
+    tx_hash=contract.functions.createfund(sender,receiver,int(amount)).transact()
+    web3.eth.waitForTransactionReceipt(tx_hash)
+    return(render_template('allocatefund.html',res='Fund Allocated'))
 
 if __name__=="__main__":
     app.run(debug=True)

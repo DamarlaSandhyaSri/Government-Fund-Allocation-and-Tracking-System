@@ -1,0 +1,53 @@
+<html>
+<head>
+    <font face="Merlin">
+        <center>
+        <table border="1" cellspacing="2" cellpadding="5" width="100%">
+        </center></td><td colspan="4"><center><font size="7" color="DarkGray"><marquee width=95%, bgcolor="HoneyDew">Government Fund Allocation And Tracking System</marquee></center></td></tr>
+        <tr><td><center>
+        <a href="/newdesc" >Home</a></center></td>
+        <td><center>
+        <a href="/allocatefund" >Allocate Fund</a></center></td>
+        <td><center>
+        <a href="/tracking" >Tracking Funds</a></center></td>
+        <td><center>
+        <a href="/logout" ><button>Logout</button></a></center></td>
+        </table>
+        </center>
+        </font>
+</head>
+<br><br><br><br>
+<body bgcolor="OldLace">
+    <br><br><br><br><br><br><br>
+    <center>
+    <font face="Arial Black" size="4" ><u><b>ALLOCATE FUNDS</b></u></font>
+    <br><br><br>
+    <form action="/allocatefundform" method="post">
+    <table>
+    <tr>
+    <td>Department</td>
+    <td><input type="text" maxlength="100" name="department"></td>
+    </tr>
+    <tr>
+    <td>Sender</td>
+    <td><input type="text" maxlength="100" name="sender"></td>
+    </tr>
+    <tr>
+    <td>Receiver</td>
+    <td><input type="text" maxlength="100" name="receiver"></td>
+    </tr>
+    <tr>
+    <td>Amount</td>
+    <td><input type="text" maxlength="100" name="amount"></td>
+    </tr>
+    <tr>
+    <td><input type="submit" value="Allocate" ></td>
+    </tr>
+    </table>
+    </form>
+    <span style="color: green;">
+        {{res}}
+    </span>
+    </center>
+    </body>
+    </html>
