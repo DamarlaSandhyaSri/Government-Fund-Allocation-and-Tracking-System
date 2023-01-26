@@ -1,53 +1,69 @@
 <html>
 <head>
-    <font face="Merlin">
-        <center>
-        <table border="1" cellspacing="2" cellpadding="5" width="100%">
-        </center></td><td colspan="4"><center><font size="7" color="DarkGray"><marquee width=95%, bgcolor="HoneyDew">Government Fund Allocation And Tracking System</marquee></center></td></tr>
-        <tr><td><center>
-        <a href="/newdesc" >Home</a></center></td>
-        <td><center>
-        <a href="/allocatefund" >Allocate Fund</a></center></td>
-        <td><center>
-        <a href="/tracking" >Tracking Funds</a></center></td>
-        <td><center>
-        <a href="/logout" ><button>Logout</button></a></center></td>
-        </table>
-        </center>
-        </font>
+    <title>
+        Dashboard Page | Government Funds Allocation and Tracking System
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        .center {
+            display:block;
+  text-align: left;
+  border: 3px solid green;
+}
+.container {
+    /* remember to set a width */
+    margin-right: auto;
+    margin-left: auto;
+}
+</style>
 </head>
-<br><br><br><br>
 <body bgcolor="OldLace">
-    <br><br><br><br><br><br><br>
-    <center>
-    <font face="Arial Black" size="4" ><u><b>ALLOCATE FUNDS</b></u></font>
-    <br><br><br>
-    <form action="/allocatefundform" method="post">
-    <table>
-    <tr>
-    <td>Department</td>
-    <td><input type="text" maxlength="100" name="department"></td>
-    </tr>
-    <tr>
-    <td>Sender</td>
-    <td><input type="text" maxlength="100" name="sender"></td>
-    </tr>
-    <tr>
-    <td>Receiver</td>
-    <td><input type="text" maxlength="100" name="receiver"></td>
-    </tr>
-    <tr>
-    <td>Amount</td>
-    <td><input type="text" maxlength="100" name="amount"></td>
-    </tr>
-    <tr>
-    <td><input type="submit" value="Allocate" ></td>
-    </tr>
-    </table>
-    </form>
-    <span style="color: green;">
-        {{res}}
-    </span>
-    </center>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Demo</a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li><a href="/newdesc">Home</a></li>
+            <li class="active"><a href="/allocatefund">Allocate Fund</a></li>
+            <li><a href="/tracking">Tracking Funds</a></li>
+            <li><a href="/logout">Logout</a></li>
+          </ul>
+        </div>
+    </nav>
+    <br/><br/>
+    <div class="container col-md-4"></div>
+    <div class="container col-md-4 center">
+        <h1 ALIGN="center"><u>Allocate Funds</u></h1>
+        <form action="/allocatefundform" method="post">
+            <div class="form-group">
+                <label for="name">Enter Department:</label>
+                <input type="text" class="form-control" id="name" placeholder="Enter Department" name="department">
+            </div>
+            <div class="form-group">
+                <label for="name">Enter Sender Wallet:</label>
+                <input type="text" class="form-control" id="name" placeholder="Enter Sender Wallet Address" name="sender">
+            </div>
+            <div class="form-group">
+                <label for="name">Enter Receiver Wallet:</label>
+                <input type="text" class="form-control" id="name" placeholder="Enter Receiver Wallet Address" name="receiver">
+            </div>
+            <div class="form-group">
+                <label for="name">Enter Amount:</label>
+                <input type="text" class="form-control" id="name" placeholder="Enter Amount" name="amount">
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Allocate Fund" />
+            </div>
+        </form>
+        <span style="color: green;">
+            {{res}}
+        </span>
+        <br/><br/>
+    </div>
     </body>
     </html>

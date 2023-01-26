@@ -1,43 +1,80 @@
 <html>
 <head>
-<title>registration</title>
+    <title>
+        Register Page | Government Funds Allocation and Tracking System
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        .center {
+            display:block;
+  text-align: left;
+  border: 3px solid green;
+}
+.container {
+    /* remember to set a width */
+    margin-right: auto;
+    margin-left: auto;
+}
+    </style>
 </head>
 <body bgcolor="Lavender">
-    <font face="Merlin">
-        <center>
-        <table border="1" cellspacing="2" cellpadding="5" width="100%">
-        </center></td><td colspan="4"><center><font size="7" color="DarkGray"><marquee width=95%, bgcolor="HoneyDew">Government Fund Allocation And Tracking System</marquee></center></td></tr>
-        <tr><td><center>
-        <a href="/desc">Home</a></center></td>
-        <td><center>
-        <a href="/login">Login</a></center></td>
-        <td><center>
-        <a href="/registration">Registration</a></center></td>
-        <td><center>
-        <a href="/publictracking">Tracking Funds</a></center></td>
-        </table>
-        </center>
-    </font>
-<center>
-<h1 ALIGN="center"><u>REGISTRATION PAGE</u></h1>
-<form action="/registeruser" method="post">
-<table>
-<tr><td>USER NAME</td><td><input type="text" name="username" /> </td>
-<tr><td>E-MAIL ID</td><td><input type="text" name="email" /></td></tr>
-<tr><td>NAME</td><td><input type="text" name="name" /></td></tr>
-<tr><td> PHONE NUMBER</td><td><input type="text" name="mobile" /></td></tr>
-<tr><td>DEPARTMENT</td><td><input type="text" name="dept" /></td></tr>
-<tr><td>ROLE</td><td><input type="text" name="role" /></td></tr>
-<tr><td>PASSWORD</td><td><input type="Password" name="password" /></td></tr>
-<br>
-<br>
-<tr><td><input type="submit" value="REGISTER"></td></tr>
-</table>
-<br>
-<br>
-<br>
-</center>
-</form>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Demo</a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li><a href="/">Home</a></li>
+            <li class="active"><a href="/registration">Register</a></li>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/publictracking">Tracking Funds</a></li>
+          </ul>
+        </div>
+    </nav>
+    <br/><br/>
+    <div class="container col-md-4"></div>
+    <div class="container col-md-4 center">
+        <br/><br/>
+    <h1 ALIGN="center"><u>REGISTRATION PAGE</u></h1>
+    <form action="/registeruser" method="post">
+    <div class="form-group">
+        <label for="name">Username:</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter Wallet Address" name="username">
+    </div>
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter Name " name="name">
+    </div>
+    <div class="form-group">
+        <label for="name">Email ID:</label>
+        <input type="text" class="form-control" id="email" placeholder="Enter Email Address" name="email">
+    </div>
+    <div class="form-group">
+        <label for="name">Phone Number:</label>
+        <input type="text" class="form-control" id="mobile" placeholder="Enter PhoneNo" name="mobile">
+    </div>
+    <div class="form-group">
+        <label for="name">Department:</label>
+        <input type="text" class="form-control" id="dept" placeholder="Enter Department" name="dept">
+    </div>
+    <div class="form-group">
+        <label for="name">Role:</label>
+        <input type="text" class="form-control" id="role" placeholder="Enter Role" name="role">
+    </div>
+    <div class="form-group">
+        <label for="name">Password:</label>
+        <input type="password" class="form-control" id="password" placeholder="Enter Password" name="password">
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Register" />
+    </div>
+    <br/><br/>
+    </form>
+    </div>
 </body>
 </html>
 
