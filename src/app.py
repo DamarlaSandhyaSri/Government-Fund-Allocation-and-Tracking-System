@@ -199,5 +199,16 @@ def allocatefundform():
     web3.eth.waitForTransactionReceipt(tx_hash)
     return(render_template('allocatefund.html',res='Fund Allocated'))
 
+@app.route('/question/<id>')
+def askQuestion(id):
+    session['id']=id
+    return render_template('publicquestion.html')
+
+@app.route('/questionform',methods=['post'])
+def questionform():
+    id=session['id']
+    comment=request.form['comment']
+    print(id,comment)
+    return render_template('publicquestion.html',res='Question Asked')
 if __name__=="__main__":
     app.run(debug=True)
