@@ -169,9 +169,14 @@ def loginuser():
     print(username,password)
     contract,web3=connect_blockchain_register(0)
     state=contract.functions.loginuser(username,int(password)).call()
-    if state==True:
+    _usernames,_emails,_names,_mobiles,_depts,_roles,_passwords=contract.functions.viewusers().call()
+    userindex=_usernames.index(username)
+    role=_roles[userindex]
+    if state==True and role==0:
         session['username']=username
         return redirect('/newdesc')
+    elif role==1:
+        return(render_template('login.html',err='You are not authorized'))
     else:
         return(render_template('login.html',err='login failed'))
 
