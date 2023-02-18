@@ -214,5 +214,17 @@ def questionform():
     web3.eth.waitForTransactionReceipt(tx_hash)
     return render_template('publicquestion.html',res='Question Asked')
 
+@app.route('/questiondetails')
+def questiondetails():
+    contract,web3=connect_blockchain_register(0)
+    _snos,_ids,_questions,_answers=contract.functions.viewQuestions().call()
+    data=[]
+    for i in range(len(_snos)):
+        dummy=[]
+        dummy.append(_ids[i])
+        dummy.append(_questions[i])
+        dummy.append(_answers[i])
+        data.append(dummy)
+    return render_template('questiondetails.html',res=data,l=len(data))
 if __name__=="__main__":
     app.run(debug=True)
