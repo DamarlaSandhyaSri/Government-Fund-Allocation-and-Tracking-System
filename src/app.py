@@ -216,7 +216,7 @@ def questionform():
 
 @app.route('/questiondetails')
 def questiondetails():
-    contract,web3=connect_blockchain_register(0)
+    contract,web3=connect_blockchain_fund(0)
     _snos,_ids,_questions,_answers=contract.functions.viewQuestions().call()
     data=[]
     for i in range(len(_snos)):
