@@ -135,7 +135,7 @@ def funddetails():
     return render_template('funddetails.html',res=data,l=len(data))
 
 @app.route('/funddetails1')
-def funddetails():
+def funddetails1():
     contract,web3=connect_blockchain_fund(0)
     _depts=contract.functions.viewAllocatedFunds().call()
     data=[]
