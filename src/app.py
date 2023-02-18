@@ -243,13 +243,27 @@ def questiondetails1():
     data=[]
     for i in range(len(_snos)):
         sender=_senders[_ids[i]-1]
-        if sender==session['username']:
+        if sender==session['username'] and len(_answers[i])==0:
             dummy=[]
-            dummy.append(_ids[i])
+            dummy.append(_snos[i])
             dummy.append(_questions[i])
             data.append(dummy)
     return render_template('questiondetails1.html',res=data,l=len(data))
 
+@app.route('/answer/<id1>')
+def askQuestion(id1):
+    session['id1']=id1
+    return render_template('answer.html')
+
+@app.route('/answerform',methods=['post'])
+def answerform():
+    id1=session['id1']
+    answer=request.form['answer']
+    print(id1,answer)
+    contract,web3=connect_blockchain_fund(0)
+    tx_hash=contract.functions.addAnswer(int(id1),answer).transact()
+    web3.eth.waitForTransactionReceipt(tx_hash)
+    return render_template('answer.html',res='answered the question')
 
 if __name__=="__main__":
     app.run(debug=True)
