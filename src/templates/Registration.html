@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css" rel="stylesheet" />
+
     <style>
         .center {
             display:block;
@@ -58,9 +61,21 @@
         <label for="name">Phone Number:</label>
         <input type="text" class="form-control" id="mobile" placeholder="Enter PhoneNo" name="mobile">
     </div>
+    <!-- Finance,Expenditure,Revenue,Education,Health,Power,Investment,Public Enterprise,Technology,Transportation -->
     <div class="form-group">
         <label for="name">Department:</label>
-        <input type="text" class="form-control" id="dept" placeholder="Enter Department" name="dept">
+        <select class="form-control selectpicker" id="select-country" data-live-search="true" name="dept">
+            <option data-tokens="finance">Finance</option>
+            <option data-tokens="expenditure">Expenditure</option>
+            <option data-tokens="revenue">Revenue</option>
+            <option data-tokens="education">Education</option>
+            <option data-tokens="health">Health</option>
+            <option data-tokens="power">Power</option>
+            <option data-tokens="investment">Investment</option>
+            <option data-tokens="publicenterprise">Public Enterprise</option>
+            <option data-tokens="technology">Technology</option>
+            <option data-tokens="transportation">Transportation</option>
+        </select>
     </div>
     <div class="form-group">
         <label for="name">Role:</label>
