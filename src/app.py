@@ -121,6 +121,18 @@ def trackingpage():
             data.append(dummy)
     return render_template('tracking.html',res=data,l=len(data))
 
+@app.route('/funddetails')
+def funddetails():
+    contract,web3=connect_blockchain_fund(0)
+    _depts=contract.functions.viewAllocatedFunds().call()
+    data=[]
+    for i in _depts:
+        dummy=[]
+        dummy.append(1000000)
+        dummy.append(i)
+        data.append(dummy)
+    return render_template('funddetails.html',res=data,l=len(data))
+
 @app.route('/registeruser',methods=['post'])
 def registeruser():
     username=request.form['username']
