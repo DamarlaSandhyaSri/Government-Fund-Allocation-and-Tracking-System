@@ -251,7 +251,7 @@ def questiondetails1():
     return render_template('questiondetails1.html',res=data,l=len(data))
 
 @app.route('/answer/<id1>')
-def askQuestion(id1):
+def answerQuestion(id1):
     session['id1']=id1
     return render_template('answer.html')
 
