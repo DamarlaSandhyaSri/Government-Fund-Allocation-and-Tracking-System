@@ -3,6 +3,7 @@ from web3 import Web3,HTTPProvider
 import json
 
 depts=['finance','expenditure','revenue','education','health','power','investment','publicenterprise','technology','transportation']
+depts1=['Finance','Expenditure','Revenue','Education','Health','Power','Investment','Public Enterprise','Technology','Transportation']
 
 def connect_blockchain_register(wallet):
     blockchain='http://127.0.0.1:7545'
@@ -157,7 +158,7 @@ def allocatefundform():
     walletindex=_usernames.index(walletaddr)
     department=_depts[walletindex]
 
-    deptindex=depts.index(department)
+    deptindex=depts1.index(department)
     sender=walletaddr
     receiver=request.form['receiver']
     amount=request.form['amount']
