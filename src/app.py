@@ -126,12 +126,26 @@ def funddetails():
     contract,web3=connect_blockchain_fund(0)
     _depts=contract.functions.viewAllocatedFunds().call()
     data=[]
-    for i in _depts:
+    for i in range(len(_depts)):
         dummy=[]
+        dummy.append(depts1[i])
         dummy.append(1000000)
-        dummy.append(i)
+        dummy.append(_depts[i])
         data.append(dummy)
     return render_template('funddetails.html',res=data,l=len(data))
+
+@app.route('/funddetails1')
+def funddetails():
+    contract,web3=connect_blockchain_fund(0)
+    _depts=contract.functions.viewAllocatedFunds().call()
+    data=[]
+    for i in range(len(_depts)):
+        dummy=[]
+        dummy.append(depts1[i])
+        dummy.append(1000000)
+        dummy.append(_depts[i])
+        data.append(dummy)
+    return render_template('funddetails1.html',res=data,l=len(data))
 
 @app.route('/registeruser',methods=['post'])
 def registeruser():

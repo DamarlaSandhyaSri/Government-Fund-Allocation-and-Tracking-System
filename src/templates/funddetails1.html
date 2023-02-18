@@ -1,7 +1,7 @@
 <html>
 <head>
     <title>
-        Public Tracking Page | Government Funds Allocation and Tracking System
+        Funding Details Page | Government Funds Allocation and Tracking System
     </title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,46 +21,44 @@
     margin-left: auto;
 }
     </style>
+    
 </head>
 <body>
     <nav class="navbar navbar-default">
         <div class="container-fluid">
           <div class="navbar-header">
-            <a class="navbar-brand" href="#">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;GOVERNMENT FUND ALLOCATION AND TRACKING SYSTEM&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</a>
+            <a class="navbar-brand" href="#">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;GOVERNMENT FUND ALLOCATION AND TRACKING SYSTEM&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</a>
           </div>
           <ul class="nav navbar-nav">
             <li><a href="/">Home</a></li>
             <li><a href="/registration">Register</a></li>
             <li><a href="/login">Login</a></li>
-            <li><a href="/funddetails1">Fund Details</a></li>
+            <li class="active"><a href="/funddetails1">Fund Details</a></li>
             <li class="active"><a href="/publictracking">Tracking Funds</a></li>
           </ul>
         </div>
     </nav>
-    <br/><br/>
-   <div class="container center">
-    <h1>
-        Fund Allocation Details
-    </h1>
-    <table class="table border">
-        <tr>
-            <th>SNo</th>
-            <th>Sender Wallet Address</th>
-            <th>Sender Name</th>
-            <th>Sender Department</th>
-            <th>Receiver Wallet</th>
-            <th>Amount</th></tr>
-        {%for i in range(0,l)%}
-        <tr>
-            <td>{{i+1}}</td>
-            <td>{{res[i][0]}}</td>
-            <td>{{res[i][1]}}</td>
-            <td>{{res[i][2]}}</td>
-            <td>{{res[i][3]}}</td>
-            <td>{{res[i][4]}}</td>
-        </tr>
-        {%endfor%}
-    </table>
-    </div>
+    <br/>
+        <div class="container center">
+            <h1>
+                Fund Details
+            </h1>
+            <table class="table border">
+                <tr>
+                    <th>SNo</th>
+                    <th>Department</th>
+                    <th>Amount</th>
+                    <th>Balance </th>
+                </tr>
+                {%for i in range(0,l)%}
+                <tr>
+                    <td>{{i+1}}</td>
+                    <td>{{res[i][0]}}</td>
+                    <td>{{res[i][1]}}</td>
+                    <td>{{res[i][2]}}</td>
+                </tr>
+                {%endfor%}
+            </table>
+            </div>
 </body>
 </html>
