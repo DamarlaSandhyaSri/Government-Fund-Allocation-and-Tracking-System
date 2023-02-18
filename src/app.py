@@ -210,9 +210,9 @@ def questionform():
     comment=request.form['comment']
     print(id,comment)
     contract,web3=connect_blockchain_fund(0)
-    tx_hash=contract.functions.addQuestion(id,comment).transact()
+    tx_hash=contract.functions.addQuestion(int(id),comment).transact()
     web3.eth.waitForTransactionReceipt(tx_hash)
     return render_template('publicquestion.html',res='Question Asked')
-    
+
 if __name__=="__main__":
     app.run(debug=True)
