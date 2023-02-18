@@ -223,8 +223,33 @@ def questiondetails():
         dummy=[]
         dummy.append(_ids[i])
         dummy.append(_questions[i])
-        dummy.append(_answers[i])
+        if(len(_answers[i])):
+            dummy.append(_answers[i])
+        else:
+            dummy.append('Not Yet Answered')
         data.append(dummy)
     return render_template('questiondetails.html',res=data,l=len(data))
+
+@app.route('/questiondetails1')
+def questiondetails1():
+    contract,web3=connect_blockchain_fund(0)
+    _snos,_ids,_questions,_answers=contract.functions.viewQuestions().call()
+
+    contract,web3=connect_blockchain_register(0)
+    _usernames,_emails,_names,_mobiles,_depts,_roles,_passwords=contract.functions.viewusers().call()
+
+    contract,web3=connect_blockchain_fund(0)
+    _senders,_receivers,_amounts=contract.functions.viewfunds().call()
+    data=[]
+    for i in range(len(_snos)):
+        sender=_senders[_ids[i]-1]
+        if sender==session['username']:
+            dummy=[]
+            dummy.append(_ids[i])
+            dummy.append(_questions[i])
+            data.append(dummy)
+    return render_template('questiondetails1.html',res=data,l=len(data))
+
+
 if __name__=="__main__":
     app.run(debug=True)

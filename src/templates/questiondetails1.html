@@ -1,7 +1,7 @@
 <html>
 <head>
     <title>
-        Public Tracking Page | Government Funds Allocation and Tracking System
+        Funding Details Page | Government Funds Allocation and Tracking System
     </title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,11 +30,11 @@
             <a class="navbar-brand" href="#">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;GOVERNMENT FUND ALLOCATION AND TRACKING SYSTEM&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</a>
           </div>
           <ul class="nav navbar-nav">
-            <li><a href="/newdesc">Home</a></li>
+            <li class="active"><a href="/newdesc">Home</a></li>
             <li><a href="/allocatefund">Allocate Fund</a></li>
             <li><a href="/funddetails">Fund Details</a></li>
-            <li class="active"><a href="/tracking">Tracking Funds</a></li>
-            <li><a href="/questiondetails1">Public Questions</a></li>
+            <li><a href="/tracking">Tracking Funds</a></li>
+            <li class="active"><a href="/questiondetails1">Public Questions</a></li>
             <li><a href="/logout">Logout</a></li>
           </ul>
         </div>
@@ -42,24 +42,21 @@
     <br/>
         <div class="container center">
             <h1>
-                Fund Allocation Details
+                Public Questions
             </h1>
             <table class="table border">
                 <tr>
                     <th>SNo</th>
-                    <th>Sender Wallet Address</th>
-                    <th>Sender Name</th>
-                    <th>Sender Department</th>
-                    <th>Receiver Wallet</th>
-                    <th>Amount</th></tr>
+                    <th>Fund Id</th>
+                    <th>Question</th>
+                    <th>Answer It</th>
+                </tr>
                 {%for i in range(0,l)%}
                 <tr>
                     <td>{{i+1}}</td>
                     <td>{{res[i][0]}}</td>
                     <td>{{res[i][1]}}</td>
-                    <td>{{res[i][2]}}</td>
-                    <td>{{res[i][3]}}</td>
-                    <td>{{res[i][4]}}</td>
+                    <td><button class="btn btn-primary"><a href="/answer/{{res[i][0]}}">Answer</a></button></td>
                 </tr>
                 {%endfor%}
             </table>
