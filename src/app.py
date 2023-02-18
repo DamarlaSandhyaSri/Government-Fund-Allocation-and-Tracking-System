@@ -2,6 +2,8 @@ from flask import Flask,render_template,request,redirect,session
 from web3 import Web3,HTTPProvider
 import json
 
+depts=['finance','expenditure','revenue','education','health','power','investment','publicenterprise','technology','transportation']
+
 def connect_blockchain_register(wallet):
     blockchain='http://127.0.0.1:7545'
     web3=Web3(HTTPProvider(blockchain))
@@ -148,13 +150,20 @@ def loginuser():
 
 @app.route('/allocatefundform',methods=['post'])
 def allocatefundform():
-    department=request.form['department']
-    sender=request.form['sender']
+    contract,web3=connect_blockchain_register(0)
+    _usernames,_emails,_names,_mobiles,_depts,_roles,_passwords=contract.functions.viewusers().call()
+
+    walletaddr=session['username']
+    walletindex=_usernames.index(walletaddr)
+    department=_depts[walletindex]
+
+    deptindex=depts.index(department)
+    sender=walletaddr
     receiver=request.form['receiver']
     amount=request.form['amount']
     print(department,sender,receiver,amount)
     contract,web3=connect_blockchain_fund(0)
-    tx_hash=contract.functions.createfund(sender,receiver,int(amount)).transact()
+    tx_hash=contract.functions.createfund(deptindex,sender,receiver,int(amount)).transact()
     web3.eth.waitForTransactionReceipt(tx_hash)
     return(render_template('allocatefund.html',res='Fund Allocated'))
 
